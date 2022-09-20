@@ -10,10 +10,10 @@ def blog_index(request):
     }
     return render(request,'blog_index.html',context)
 def blog_detail(request):
-    blog=Blog.objects.get(pk=pk)
-    comment=Comment.objects.filter(post=post)
+    post=Post.objects.get(pk=pk)
+    comments=Comment.objects.filter(post=post)
     context = {
-        'post': post
-        'comment':comment
+        'post': post,
+        'comments':comments,
     }
     return render(request, 'blog_detail.html', context)
