@@ -9,7 +9,7 @@ def blog_index(request):
         'posts':posts
     }
     return render(request,'blog_index.html',context)
-def blog_detail(request):
+def blog_detail(request,pk):
     post=Post.objects.get(pk=pk)
     comments=Comment.objects.filter(post=post)
     context = {
