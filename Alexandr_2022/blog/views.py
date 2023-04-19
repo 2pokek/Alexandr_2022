@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Post, Comment
-
+from .forms import CommentForm
 
 # Create your views here.
 def blog_index(request):
@@ -13,7 +13,7 @@ def blog_index(request):
 
 def blog_detail(request, pk):
     post = Post.objects.get(pk=pk)
-    form = Comment.form()
+    form = CommentForm()
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -26,7 +26,7 @@ def blog_detail(request, pk):
     comments = Comment.objects.filter(post=post)
     context = {
         'post': post,
-        'comment': comment,
+        'comments': comments,
         "form": form
     }
     return render(request, 'blog_detail.html', context)
